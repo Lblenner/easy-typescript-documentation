@@ -61,7 +61,7 @@ function getBody(json: any[], title: string, desc?: string) {
         let rows = [["Name", "Type", "Description", "Note"]]
         let note = false
         properties.forEach((element: any) => {
-            let row = [element.name ? element.name : element.key, element.type, element.description, element.note ? element.note : "  ", element.adv]
+            let row = [element.name ? element.name : element.key, element.type, element.description, element.note ? element.note : "  ", element.color]
             rows.push(row)
             if (element.note) {
                 note = true
@@ -71,21 +71,25 @@ function getBody(json: any[], title: string, desc?: string) {
         html += `<div class="marged" 
         id=${index.toString()}>
         <h2>${obj.name}</h2>
-        <div class="marged"><p>${obj.description}</p><h4>Properties</h4><div class="grid"><div class="field">`
-        html += getRows(rows, 0)
-        html += `</div><div class="field">`
-        html += getRows(rows, 1)
-        html += `</div><div class="large-field">`
-        html += getRows(rows, 2)
-        html += `</div>`
+        <div class="marged"><p>${obj.description}</p>`
 
-        if (note) {
-            html += `<div class="medium-field">`
-            html += getRows(rows, 3)
+        if (properties.length !== 0) {
+            html += `<h4>Properties</h4><div class="grid"><div class="field">`
+            html += getRows(rows, 0)
+            html += `</div><div class="field">`
+            html += getRows(rows, 1)
+            html += `</div><div class="large-field">`
+            html += getRows(rows, 2)
+            html += `</div>`
+
+            if (note) {
+                html += `<div class="medium-field">`
+                html += getRows(rows, 3)
+                html += `</div>`
+            }
             html += `</div>`
         }
-
-        html += `</div></div></div><hr class="solid"></hr>`
+        html += `</div></div><hr class="solid"></hr>`
 
     })
 

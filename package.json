@@ -2,10 +2,12 @@
   "name": "easy-typescript-documentation",
   "version": "1.0.0",
   "description": "Create documentation from class",
-  "main": "index.js",
-  "scripts": {
+  "prepublish": "tsc",
+  "main": "dist/index.js",
+    "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lblenner/easy-typescript-documentation"
