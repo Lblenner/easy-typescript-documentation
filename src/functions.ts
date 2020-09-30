@@ -58,38 +58,67 @@ function getBody(json: any[], title: string, desc?: string) {
     json.forEach((obj, index) => {
 
         const properties = obj.properties
-        let rows = [["Name", "Type", "Description", "Note"]]
+        let rows = [["Name", "Type", "Description", "Note", "Color", "Mapping"]]
         let note = false
+        let mapping = false
         properties.forEach((element: any) => {
-            let row = [element.name ? element.name : element.key, element.type, element.description, element.note ? element.note : "  ", element.color]
+            let row = [element.name ? element.name : element.key, element.type, element.description, element.note ? element.note : "  ", element.color, element.map]
             rows.push(row)
             if (element.note) {
                 note = true
+            }
+            if (element.map) {
+                mapping = true
             }
         });
 
         html += `<div class="marged" 
         id=${index.toString()}>
         <h2>${obj.name}</h2>
-        <div class="marged"><p>${obj.description}</p>`
+        <div class="marged"><p>${obj.description}</p><h4>Properties</h4><div class="grid">`
 
-        if (properties.length !== 0) {
-            html += `<h4>Properties</h4><div class="grid"><div class="field">`
-            html += getRows(rows, 0)
-            html += `</div><div class="field">`
-            html += getRows(rows, 1)
-            html += `</div><div class="large-field">`
-            html += getRows(rows, 2)
-            html += `</div>`
+        rows.forEach((row, index) => {
+            html += `<div class="rows">`
+
+            html += `<div class="field row ${index === 0 && "bottom"}
+            ${index === rows.length - 1 && "no-bottom"}
+            ${row[4] && row[4]}">
+                    ${row[0]}
+            </div>`
+
+            html += `<div class="field row ${index === 0 && "bottom"}
+            ${index === rows.length - 1 && "no-bottom"}
+            ${row[4] && row[4]}">
+                    ${row[1]}
+            </div>`
+
+            if (mapping) {
+                html += `<div class="field row ${index === 0 && "bottom"}
+                ${index === rows.length - 1 && "no-bottom"}
+                ${row[4] && row[4]}">
+                        ${row[5] ? row[5] : ""}
+                </div>`
+            }
+
+            html += `<div class="large-field row ${index === 0 && "bottom"}
+            ${index === rows.length - 1 && "no-bottom"}
+            ${row[4] && row[4]}">
+                    ${row[2]}
+            </div>`
 
             if (note) {
-                html += `<div class="medium-field">`
-                html += getRows(rows, 3)
-                html += `</div>`
+                html += `<div class="medium-field row 
+                    ${index === 0 && "bottom"}
+                    ${index === rows.length - 1 && "no-bottom"}
+                    ${row[4] && row[4]}">
+                        ${row[3]}
+                </div>`
             }
+
             html += `</div>`
-        }
-        html += `</div></div><hr class="solid"></hr>`
+        })
+
+        html += `</div></div></div><hr class="solid"></hr>`
 
     })
 
@@ -99,18 +128,4 @@ function getBody(json: any[], title: string, desc?: string) {
 
 }
 
-const css = "body {margin: 0;padding: 0;font-family: sans-serif;}hr.solid {border-top: 3px;}div.marged {margin-left: 16px;margin-right: 16px;}div.grid {display: flex;flex-direction: row;flex: 1;border: solid;border-width: 2px 2px 2px 2px;margin-bottom: 20px;}div.field {min-width: 200px;border: solid;border-width: 0px 1px 0px 0px;}div.medium-field {flex: 1;}div.large-field {flex: 1;border: solid;border-width: 0px 1px 0px 0px;}div.row {display: flex;align-items: center;border: solid;border-width: 0px 0px 1px 0px;min-height: 40px;padding: 10px;}div.bottom {border: solid;border-width: 0px 0px 2px 0px;}div.no-bottom {border: solid;border-width: 0px 0px 0px 0px;}div.container {display: flex;flex-direction: row;justify-content: stretch;height: 100vh;overflow: hidden;}#right {display: flex;flex: 1;flex-direction: column;overflow-y: auto;background-color: #E5D0CC;}div.wrapper {display: flex;flex: 1;min-height: 0px;}div.nav {flex-direction: column;display: flex;width: 300px;justify-content: center;background-color: #BFACB5;overflow-y: hidden;border: solid;border-width: 0px 1px 1px 0px;}div.nav-item {text-align: center;margin-top: 5px;margin-bottom: 5px;padding: 10px;background-color: #172121;color: lightgray;font-weight: 900;}div.nav-item:hover {cursor: pointer;}div.red {background-color: rgb(200, 8, 8, 0.5);}div.orange {background-color: rgb(229, 110, 35, 0.8);}div.grey {background-color: rgb(100, 100, 100, 0.6);}div.no-opa {opacity: 1;}"
-
-function getRows(rows: any[], nb: number) {
-
-    let str = ""
-
-    rows.forEach((row, index) => {
-        str += `<div class="row ${index === 0 ? "bottom" : ""}  
-                ${index === rows.length - 1 ? "no-bottom" : ""} 
-                ${row[4] ? row[4] : ""}">
-                ${row[nb]}</div>`
-    })
-
-    return str
-}
+const css = "body {margin: 0;padding: 0;font-family: sans-serif;}hr.solid {border-top: 3px;}div.marged {margin-left: 16px;margin-right: 16px;}div.grid {border: solid;border-width: 2px 2px 2px 2px;margin-bottom: 20px;display: flex;flex-direction: column;}div.rows {display: flex;flex-direction: row;flex: 1;}div.field {min-width: 200px;border: solid;border-width: 0px 1px 0px 0px;}div.medium-field {flex: 1;}div.large-field {flex: 1;border: solid;border-width: 0px 1px 0px 0px;}div.row {display: flex;align-items: center;border: solid;border-width: 0px 0px 1px 1px;min-height: 40px;padding: 10px;}div.bottom {border: solid;border-width: 0px 0px 2px 1px;}div.no-bottom {border: solid;border-width: 0px 0px 0px 1px;}div.container {display: flex;flex-direction: row;justify-content: stretch;height: 100vh;overflow: hidden;}#right {display: flex;flex: 1;flex-direction: column;overflow-y: auto;background-color: #E5D0CC;}div.wrapper {display: flex;flex: 1;min-height: 0px;}div.nav {flex-direction: column;display: flex;width: 300px;justify-content: center;background-color: #BFACB5;overflow-y: hidden;border: solid;border-width: 0px 1px 1px 0px;}div.nav-item {text-align: center;margin-top: 5px;margin-bottom: 5px;padding: 10px;background-color: #172121;color: lightgray;font-weight: 900;}div.nav-item:hover {cursor: pointer;}div.red {background-color: rgb(200, 8, 8, 0.5);}div.orange {background-color: rgb(229, 110, 35, 0.8);}div.grey {background-color: rgb(100, 100, 100, 0.6);}div.no-opa {opacity: 1;}"
