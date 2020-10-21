@@ -14,8 +14,6 @@ If you don't like the look, feel free to create your own layout based on the jso
 
 [Github Repository.](https://github.com/Lblenner/easy-typescript-documentation)
 
-Support for methods is coming. (probably soon)
-
 
 # Quick Start
 
