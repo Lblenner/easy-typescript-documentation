@@ -72,7 +72,6 @@ The objects follow this pattern.
         //Annotated properties
         properties : [{
             key: "key",                     //key of the propertie
-            type: "string"                  //Typescript type
             name: "name",                   //If using @Name
             description: "description",     //If using @Desc
             color: "red",                   //If using @Color
@@ -119,7 +118,6 @@ Here is the resulting json.
         properties : [
             {
                 key: "id",
-                type: "number",
                 myCustomKey2: 1,
                 number: 3,
                 string: "value"
