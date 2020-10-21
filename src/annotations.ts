@@ -12,6 +12,7 @@ export const Name = createPropertieAnnotation<string>("name")
 export const Desc = createPropertieAnnotation<string>("description")
 export const Color = createPropertieAnnotation<DOC_COLOR>("color")
 export const Note = createPropertieAnnotation<string>("note")
+export const Type = createPropertieAnnotation<string>("type")
 
 export const ClassDesc  = createClassAnnotation<string>("description")
 export const ClassName = createClassAnnotation<string>("name")

@@ -2,6 +2,7 @@ export {
     Doc,
     ClassName,
     ClassDesc,
+    Type,
     Name,
     Note,
     Color,

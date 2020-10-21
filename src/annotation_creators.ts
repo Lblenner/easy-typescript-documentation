@@ -1,6 +1,6 @@
 import { IDENTIFIER } from "./identifiers";
 
-function setProp(obj: any, keyPropertie: string, key: string, value: any) {
+function setProp(obj: any, _keyPropertie: string, key: string, value: any) {
 
     obj[IDENTIFIER] = {
         ...obj[IDENTIFIER],
@@ -21,8 +21,9 @@ function setKey(obj: any, keyPropertie: string, key: string, value: any) {
 
     let val = descriptor[keyPropertie]
 
+    
     if (!val) {
-        val = { key: keyPropertie, type: typeof value }
+        val = { key: keyPropertie }
     }
 
     val[key] = value
@@ -58,9 +59,9 @@ function createAnnotation<T0, T1, T2, T3>(func: any, key0: string, key1?: string
         return function (arg0: T0, arg1: T1, arg2: T2, arg3: T3) {
             return function (target: any, key: string) {
 
-                func(target, key, key0, arg3)
-                func(target, key, key0, arg2)
-                func(target, key, key0, arg1)
+                func(target, key, key3, arg3)
+                func(target, key, key2, arg2)
+                func(target, key, key1, arg1)
                 func(target, key, key0, arg0)
 
             }
@@ -69,8 +70,8 @@ function createAnnotation<T0, T1, T2, T3>(func: any, key0: string, key1?: string
         return function (arg0: T0, arg1: T1, arg2: T2) {
             return function (target: any, key: string) {
 
-                func(target, key, key0, arg2)
-                func(target, key, key0, arg1)
+                func(target, key, key2, arg2)
+                func(target, key, key1, arg1)
                 func(target, key, key0, arg0)
 
             }
@@ -79,7 +80,7 @@ function createAnnotation<T0, T1, T2, T3>(func: any, key0: string, key1?: string
         return function (arg0: T0, arg1: T1) {
             return function (target: any, key: string) {
 
-                func(target, key, key0, arg1)
+                func(target, key, key1, arg1)
                 func(target, key, key0, arg0)
 
             }

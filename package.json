@@ -1,6 +1,6 @@
 {
   "name": "easy-typescript-documentation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Create documentation from class",
   "prepublish": "tsc",
   "keywords": [
