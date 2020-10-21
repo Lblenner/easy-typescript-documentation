@@ -1,8 +1,8 @@
 # Easy-typescript-documentation
 
-Generate documentation based on your typescript classes.  
+Generate documentation based on your typescript classes.
 I created this package because I had difficulties using [tsdoc](https://github.com/microsoft/tsdoc) for my basic needs.
-
+You can retreive an object from your annotations and choose how to display your informations.
 
 Check out [typescirpt-rest](https://www.npmjs.com/package/typescript-rest) if you want to generate documentation for your API.  
 If you need more functionnalities check out [tsdoc](https://github.com/microsoft/tsdoc).
